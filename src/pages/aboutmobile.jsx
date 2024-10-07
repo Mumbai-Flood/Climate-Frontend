@@ -35,7 +35,7 @@ const handleclick = () => {
                         By disseminating near-real-time rainfall and  waterlogging information through a dedicated website portal <a>https://www.mumbaiflood.in/</a> and the MUMBAI FLOOD APP, we aim to provide Mumbaikars with timely and accurate rainfall forecast and flood updates to help them plan their rain days ahead. 
                         <br/>
                         <br/>
-                        This is an initiative by HDFC-ERGO IIT Bombay (HE-IITB) Innovation Lab, with funded from HDFC ERGO, in collaboration with the MCGM Centre for Municipal Capacity Building and Research (MCMCR). 
+                        This is an initiative by HDFC-ERGO IIT Bombay (HE-IITB) Innovation Lab, with funding from HDFC ERGO, in collaboration with the MCGM Centre for Municipal Capacity Building and Research (MCMCR). 
 
                         <br/>
                         <br/>
