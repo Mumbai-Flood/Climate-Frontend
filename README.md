@@ -144,4 +144,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - All contributors and community members
 
 ---
-Made with ❤️ by the Mumbai Flood Team
+Made with ❤️ by the Climate Studies IIT Bombay
