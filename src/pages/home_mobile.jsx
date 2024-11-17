@@ -43,28 +43,27 @@ function HomeMobile({ warningtab }) {
     };
 
     return (
-        <div className='h-full w-full bg-[#f0f0f0]'>
+        <div className='h-full w-full bg-[#f0f0f0] pt-16'>
             {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white p-6 rounded-lg text-center">
-                        <h2 className="text-xl font-bold mb-4">Important Information!</h2>
-                        <ul className="text-left mb-4">
-                              {/* <li>1. Hourly rainfall forecasts (also known as 'Nowcasts'), displayed on the ‘Rainfall’ widget, are being updated every 1 hour.</li> */}
-                        <li>1. Next 3-day rainfall forecasts are being displayed on the ‘Rainfall’ widget.</li>
-                        <li>2. FORM for reporting water levels in your area is available under 'Reported Flood' tab on the Home Page.</li>
-                        <li>3. Near real-time waterlogging information obtained from nine water-level sensors installed across Mumbai is available under Waterlevel widget.</li>
-                        <li>4. The hourly rainfall forecast model is still under improvement.</li>
-                        <li>5. Observed data is being sourced from Municipal Corporation of Greater Mumbai (MCGM) (https://dm.mcgm.gov.in/).</li>
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
+                    <div className="bg-white p-4 sm:p-6 rounded-lg text-center max-w-sm w-full">
+                        <h2 className="text-lg sm:text-xl font-bold mb-3">Important Information!</h2>
+                        <ul className="text-left mb-3 text-sm sm:text-base space-y-2">
+                            <li>1. Next 3-day rainfall forecasts are being displayed on the 'Rainfall' widget.</li>
+                            <li>2. FORM for reporting water levels in your area is available under 'Reported Flood' tab on the Home Page.</li>
+                            <li>3. Near real-time waterlogging information obtained from nine water-level sensors installed across Mumbai is available under Waterlevel widget.</li>
+                            <li>4. The hourly rainfall forecast model is still under improvement.</li>
+                            <li>5. Observed data is being sourced from Municipal Corporation of Greater Mumbai (MCGM) (https://dm.mcgm.gov.in/).</li>
                         </ul>
-                        <div className="flex justify-around">
+                        <div className="flex justify-center gap-3">
                             <button 
-                                className="bg-blue-500 text-white px-4 py-2 rounded" 
+                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm sm:text-base transition-colors duration-200" 
                                 onClick={handleModalClose}
                             >
                                 OK
                             </button>
                             <button 
-                                className="bg-red-500 text-white px-4 py-2 rounded" 
+                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm sm:text-base transition-colors duration-200" 
                                 onClick={handleDontShowAgain}
                             >
                                 Don't show again
@@ -74,39 +73,48 @@ function HomeMobile({ warningtab }) {
                 </div>
             )}
             <div className='w-full relative'>
-                <div className="absolute backdrop:mb-2 w-full mx-auto flex justify-center z-30"> {/* Ensure buttons appear above the map */}
+                <div className="sticky top-16 w-full px-2 mx-auto flex justify-center z-30 bg-[#f0f0f0] py-2">
                     <span
-                        className={`h-[3rem] w-1/5 flex items-center justify-center  text-center text-sm font-serif cursor-pointer rounded-l-xl transition-all duration-300 ${
-                            selectedTab === 1 ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white' : 'bg-gray-200 hover:bg-gray-300'
-                        } shadow-xl`}
+                        className={`h-12 flex-1 flex items-center justify-center text-center text-[13px] sm:text-[15px] font-semibold tracking-wide cursor-pointer rounded-l-xl transition-all duration-300 ${
+                            selectedTab === 1 
+                            ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                        }`}
                         onClick={() => handletabChange(1)}
                     >
                         Rainfall
                     </span>
                     <span
-                        className={`h-[3rem] w-1/5 flex items-center justify-center text-center text-sm font-serif cursor-pointer transition-all duration-300 ${
-                            selectedTab === 2 ? 'bg-gradient-to-r from-red-500 to-red-700 text-white' : 'bg-gray-200 hover:bg-gray-300'
-                        } shadow-xl`}
+                        className={`h-12 flex-1 flex items-center justify-center text-center text-[13px] sm:text-[15px] font-semibold tracking-wide cursor-pointer transition-all duration-300 ${
+                            selectedTab === 2 
+                            ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                        }`}
                         onClick={() => handletabChange(2)}
                     >
                         Waterlevel
                     </span>
                     <span
-                        className={`h-[3rem] w-1/4 flex items-center justify-center text-center text-sm font-serif cursor-pointer rounded-r-xl transition-all duration-300 ${
-                            selectedTab === 3 ? 'bg-gradient-to-r from-green-500 to-green-700 text-white' : 'bg-gray-200 hover:bg-gray-300'
-                        } shadow-xl`}
+                        className={`h-12 flex-1 flex items-center justify-center text-center text-[13px] sm:text-[15px] font-semibold tracking-wide cursor-pointer rounded-r-xl transition-all duration-300 ${
+                            selectedTab === 3 
+                            ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                        }`}
                         onClick={() => handletabChange(3)}
                     >
                         Reported Flood
                     </span>
-                    <div className='absolute scroll-to-top  top-[60px] right-2 z-30'>
-                <button onClick={handleScroll} className='rounded-full bg-red-500 text-white text-sm py-2 px-4 alert-button'>
-                    Scroll Down
-                </button>
-            </div>
+                </div>
+                <div className='fixed bottom-4 right-4 z-30'>
+                    <button 
+                        onClick={handleScroll} 
+                        className='rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs sm:text-sm py-2 px-4 shadow-lg transition-all duration-300'
+                    >
+                        {widgetContainerRef.current && window.scrollY > widgetContainerRef.current.offsetTop ? 'Scroll Up' : 'Scroll Down'}
+                    </button>
                 </div>
             </div>
-            <div className='w-full h-[70%] flex flex-col relative z-10'>
+            <div className='w-full h-[60vh] sm:h-[65vh] flex flex-col relative z-10'>
                 <MapContainer
                     className='h-full w-full'
                     center={[19.1, 72.9]}
@@ -138,23 +146,23 @@ function HomeMobile({ warningtab }) {
                     
                 </MapContainer>
             </div>
-            <div className='w-full h-[70%] flex flex-col relative z-20' ref={widgetContainerRef}>
+            <div className='w-full min-h-[40vh] sm:min-h-[35vh] flex flex-col relative z-20 bg-gray-100' ref={widgetContainerRef}>
             
                 {selectedTab === 1 && rainfallLocations && (
-                    <div className="z-20 mt-2">
+                    <div className="z-20 p-2 sm:p-4">
                         <SearchBar selectedOption={rainfallLocations} setSelectedOption={setRainfallLocations} setZoomToLocation={setZoomToLocation}/>
                         <RainfallWidget selectedOption={rainfallLocations} />
                     </div>
                 )}
 
                 {selectedTab === 2 && (
-                    <div className="z-20 mt-5">
+                    <div className="z-20 p-2 sm:p-4">
                         <WaterlevelWidget location={waterlevelLocations} setLocation={setWaterlevelLocations} />
                     </div>
                 )}
 
                 {selectedTab === 3 && (
-                    <div className='z-20 mt-1'>
+                    <div className='z-20 p-2 sm:p-4'>
                         <Form setCsPinDropLocation={setCsPinDropLocation} csPinDropLocation={csPinDropLocation} setCsPinToggle={setCsPinToggle} csPinToggle={csPinToggle} setZoomToLocation={setZoomToLocation} />
                     </div>
                 )}

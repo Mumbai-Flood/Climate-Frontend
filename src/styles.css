@@ -1,35 +1,64 @@
+/* Tailwind Imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Font Imports */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
-.font-nunito-sans{
-  font-family: 'Nunito Sans', serif;
+/* Typography */
+.font-nunito-sans {
+  font-family: 'Nunito Sans', sans-serif;
 }
+
 .lato-regular {
   font-family: "Lato", sans-serif;
-  font-weight: 100;
-  font-style: normal;
+  font-weight: 400;
 }
+
 .font-merriweather {
   font-family: 'Merriweather', serif;
 }
+
 .font-roboto {
-  font-family: 'Roboto', serif;
-}
-.font-playfair {
-  font-family: 'Playfair', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
-.flex-col{
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Layout */
+.flex-col {
   display: flex;
   flex-direction: column;
 }
+
+/* Page Layout */
+.page-container {
+  @apply min-h-[calc(100vh-4rem)] pt-16 w-full;
+}
+
+.page-content {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Animations */
 @keyframes blink {
   0% { opacity: 1; }
   50% { opacity: 0; }
@@ -40,7 +69,7 @@
   animation: blink 1s infinite;
 }
 
-
+/* Map Styles */
 .leaflet-container {
   height: 100%;
   width: 100%;
@@ -56,59 +85,90 @@
   justify-content: center;
   border-radius: 50%;
   font-size: 1.2rem;
-  box-shadow: 0 0 0px 5px #fff;
+  box-shadow: 0 0 0 5px #fff;
+  transition: transform 0.2s ease;
 }
+
+.cluster-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Widget Styles */
 .widget-container {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   color: white;
-  padding: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.widget-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .widget-title {
   font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .widget-divider {
-  margin: 10px 0;
+  margin: 0.625rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Station Styles */
 .station-buttons-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 0.625rem;
+  padding: 0.5rem;
 }
 
 .station-button {
   background-color: #007BFF;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 0.375rem;
+  padding: 0.625rem 1.25rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .station-button.selected,
 .station-button:hover {
   background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.station-button:active {
+  transform: translateY(0);
 }
 
 .station-info {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.popup-content {
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: bold;
+  background-color: #F0F0F0;
 }
 
 .station-image {
   width: 300px;
   height: 300px;
   margin-top: 10px;
-}
-.popup-content {
-  font-size: 16px;
-  font-family: Arial;
-  font-weight: bold;
-  background-color: #F0F0F0;
 }

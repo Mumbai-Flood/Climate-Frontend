@@ -8,7 +8,7 @@ const SearchBar = ({ setSelectedOption, selectedOption, setZoomToLocation }) => 
 
     const handleInputChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
-        setShowOptions(e.target.value !== '');
+        setShowOptions(true);
     };
 
     const handledropdown = () => {
@@ -21,7 +21,6 @@ const SearchBar = ({ setSelectedOption, selectedOption, setZoomToLocation }) => 
         setShowOptions(false);
         setSelectedOption(station);
         setZoomToLocation([station.latitude, station.longitude]);
-        console.log('selected station:', station);
     };
 
     useEffect(() => {
@@ -47,47 +46,59 @@ const SearchBar = ({ setSelectedOption, selectedOption, setZoomToLocation }) => 
         }
     }, [selectedOption]);
 
+    const filteredStations = stations.filter(
+        (station) => station.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div className="w-2/3 h-12 mx-16">
-            <div className={`bg-black bg-opacity-80 rounded text-white flex border border-black ${showOptions ? 'rounded-t-md' : 'rounded-md'}`}>
-                <input
-                    id="search-input"
-                    className={`w-full px-4 py-2 bg-[#373A40] text-white focus:outline-none ${
-                        showOptions ? 'rounded-t-md' : 'rounded-md'
-                    }`}
-                    type="text"
-                    placeholder="Search Stations.."
-                    autoComplete="off"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                />
-                <div className='dropdown flex flex-col justify-center cursor-pointer' onClick={handledropdown}>
-                    {showOptions ? (
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
-                        </span>
-                    ) : (
-                        <span>
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-                        </span>
-                    )}
+        <div className="relative w-full max-w-md mx-auto">
+            <div className="relative">
+                <div className={`flex items-center overflow-hidden bg-gray-900/90 backdrop-blur-sm border border-gray-700 
+                    ${showOptions ? 'rounded-t-lg' : 'rounded-lg'} 
+                    transition-all duration-300 shadow-lg`}>
+                    <input
+                        type="text"
+                        className="flex-1 px-4 py-2.5 bg-transparent text-gray-100 placeholder-gray-400 
+                                focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                        placeholder="Search stations..."
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                        onFocus={() => setShowOptions(true)}
+                    />
+                    <button 
+                        onClick={handledropdown}
+                        className="p-2.5 text-gray-400 hover:text-gray-200 transition-colors"
+                    >
+                        {showOptions ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" 
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="m18 15-6-6-6 6"/>
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" 
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        )}
+                    </button>
                 </div>
-            </div>
-            
-            <div className="max-h-[20rem] overflow-y-scroll border border-slate-500 relative z-20">
-                {stations
-                    .filter((station) => station.name.toLowerCase().includes(searchTerm))
-                    .map((station) =>
-                        showOptions ? (
+
+                {showOptions && filteredStations.length > 0 && (
+                    <div className="absolute w-full mt-0.5 max-h-60 overflow-y-auto rounded-b-lg bg-gray-900/90 backdrop-blur-md 
+                                border border-gray-700 shadow-lg z-50">
+                        {filteredStations.map((station, index) => (
                             <button
-                                key={station.id}
-                                className="px-4 py-2 bg-black text-white border-gray-100 hover:bg-gray-100 hover:text-black active:bg-blue-100 cursor-pointer w-full text-left"
-                                onClick={() => handleStationSelection(station)}>
+                                key={station.id || index}
+                                onClick={() => handleStationSelection(station)}
+                                className="w-full px-4 py-2.5 text-left text-gray-200 hover:bg-gray-800/80 
+                                        transition-colors duration-150 focus:outline-none
+                                        border-b border-gray-700 last:border-b-0"
+                            >
                                 {station.name}
                             </button>
-                        ) : null
-                    )
-                }            
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

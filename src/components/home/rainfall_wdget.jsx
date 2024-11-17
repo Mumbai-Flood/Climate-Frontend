@@ -35,30 +35,25 @@ export default function RainfallWidget({ selectedOption }) {
     }
 
     return (
-        <>
-            <div className='w-2/3 flex justify-evenly text-xs text-slate-600 font-bold flex-row text-center align-middle mx-20'>
-                Current Time: {time} (in IST)
+        <div className='relative text-xl mt-2 min-w-[30vw] max-w-[40rem] bg-[rgba(0,0,0,.8)] rounded-xl h-max mx-0 my-0 flex flex-col p-1 py-1 shadow-lg z-10'>
+            <div className='relative flex justify-center '>
+                <div className=' flex justify-evenly text-xs text-white font-bold flex-col text-center'>
+                    <img src={plac} alt="IIT Logo" width="15" height="15" className='right-0'/>
+                </div>
+                <div className='flex justify-evenly text-xs text-white font-bold flex-col text-center'>
+                    <span className='text-white text-xs font-bold mx-1 my-2'>{data.station.name}</span> 
+                </div>
             </div>
-            <div className='relative text-xl min-w-[30vw] max-w-[40rem] bg-[rgba(0,0,0,.8)] rounded-xl h-max mx-0 my-0 flex flex-col p-1 py-1 shadow-lg z-10'>
-                <div className='relative flex justify-center '>
-                    <div className=' flex justify-evenly text-xs text-white font-bold flex-col text-center'>
-                        <img src={plac} alt="IIT Logo" width="15" height="15" className='right-0'/>
-                    </div>
-                    <div className='flex justify-evenly text-xs text-white font-bold flex-col text-center'>
-                        <span className='text-white text-xs font-bold mx-1 my-2'>{data.station.name}</span> 
-                    </div>
-                </div>
-                <div className='flex-col align-bottom justify-center h-max relative'>
-                    <RainfallBarChart data={data} />
-                </div>
-                <div className='flex-col align-bottom justify-center h-max'>
-                    <DailyPredictionChart data={data} />
-                </div>
-                <div className='flex-col align-bottom justify-center h-max'>
-                    <PastRainfallChart data={data} />
-                </div>
-            </div>  
-        </>
+            <div className='flex-col align-bottom justify-center h-max relative'>
+                <RainfallBarChart data={data} />
+            </div>
+            <div className='flex-col align-bottom justify-center h-max'>
+                <DailyPredictionChart data={data} />
+            </div>
+            <div className='flex-col align-bottom justify-center h-max'>
+                <PastRainfallChart data={data} />
+            </div>
+        </div>
     );
 }
 

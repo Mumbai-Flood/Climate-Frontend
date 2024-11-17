@@ -3,6 +3,7 @@ import { fetchLocationData, sendFormData } from '../../utils/crowdSourceAPI';
 
 function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinToggle, setZoomToLocation} ) {
     const [name, SetName] = useState('');
+    const [phone, SetPhone] = useState('');
     const [feet, setFeet] = useState(null);
     const [inches, setInches] = useState(null);
     const [waterlevelfactor, setWaterlevelfactor] = useState(0);
@@ -64,6 +65,7 @@ function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinTo
 
         const sendata = {
             name: name,
+            phone: phone,
             feet : data.feet,
             inch : data.inch,
             location: location,
@@ -147,26 +149,40 @@ function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinTo
 
 
     return (
-        <div className="max-w-xl mx-auto px-6 py-2 mt-5 bg-black rounded-lg  bg-opacity-80">
-            <h1 className="text-3xl text-center font-semibold mb-6 mt-5 text-white">Submit Data</h1>
-            <div className='flex flex-col justify-stretch'>
+        <div className="max-w-xl mx-auto px-6 py-2 bg-black rounded-lg bg-opacity-80">
+            <h1 className="text-2xl text-center font-semibold text-white mb-2">Submit Data</h1>
+            <div className='flex flex-col justify-stretch gap-2'>
                 {gpslocation ?
-                    <button className="bg-blue-700 text-blue-100 py-1 px-0 rounded-md mb-4">using current location...</button>
+                    <button className="bg-blue-700 text-blue-100 py-1 px-0 rounded-md">using current location...</button>
                     :
-                    <button onClick={getgps} className={`${csPinToggle ? 'bg-blue-300 disabled cursor-default' : 'pointer bg-blue-500 hover:bg-blue-600 '} text-white py-1 px-0 rounded-md mb-6`}>Use my current location</button>
+                    <button onClick={getgps} className={`${csPinToggle ? 'bg-blue-300 disabled cursor-default' : 'pointer bg-blue-500 hover:bg-blue-600 '} text-white py-1 px-0 rounded-md`}>Use my current location</button>
                 }
-                <button onClick={handlePinDropToggle} className={`${gpslocation ? 'bg-blue-300 disabled cursor-default' : csPinToggle ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white py-1 px-0 rounded-md mb-4`}>
+                <button onClick={handlePinDropToggle} className={`${gpslocation ? 'bg-blue-300 disabled cursor-default' : csPinToggle ? 'bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white py-1 px-0 rounded-md`}>
                     {csPinToggle ? 'Close' : 'Use location from map'}
                 </button>
 
-                <label htmlFor='name' className="block text-white mb-3">Name:</label>
-                <input type="text" id="name" placeholder='enter your name' name="name" value={name} onChange={(e)=>SetName(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
+                <div className="grid grid-cols-3 gap-4 mt-2">
+                    <label htmlFor='name' className="text-white flex items-center">Name:</label>
+                    <input type="text" id="name" placeholder='enter your name' name="name" value={name} onChange={(e)=>SetName(e.target.value)} 
+                        className="col-span-2 border rounded-md py-1.5 px-4 bg-blue-50 text-slate-900" />
+                </div>
 
+                <div className="grid grid-cols-3 gap-4 mt-2">
+                    <label htmlFor='phone' className="text-white flex items-center">Phone:</label>
+                    <input type="text" id="phone" placeholder='enter your phone number' name="phone" value={phone} onChange={(e)=>SetPhone(e.target.value)} 
+                        className="col-span-2 border rounded-md py-1.5 px-4 bg-blue-50 text-slate-900" />
+                </div>
 
-                <div className="flex items-center mt-5" >
+                <div className="grid grid-cols-3 gap-4 mt-2">
+                    <label htmlFor='location' className="text-white flex items-center">Location:</label>
+                    <input type="text" id="location" placeholder='enter your location' name="location" value={location} onChange={(e)=>setLocation(e.target.value)} 
+                        className="col-span-2 border rounded-md py-1.5 px-4 bg-blue-50 text-slate-900" />
+                </div>
+
+                <div className="flex items-center mt-2" >
                     <label htmlFor="height" className="block h-full text-white flex-col justify-center mr-4 mb-4">Your Height:</label>
 
-                    <select id="height" name="height" value={feet} onChange={(e) => setFeet(e.target.value)} className="w-1/3 mr-4 border rounded-md py-2 px-1 mb-4 bg-blue-50 text-slate-900">
+                    <select id="height" name="height" value={feet} onChange={(e) => setFeet(e.target.value)} className="w-1/3 mr-4 border rounded-md py-1.5 px-1 mb-4 bg-blue-50 text-slate-900">
                         <option value={null}>Feet</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -174,7 +190,7 @@ function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinTo
                         <option value="6">6</option>
                         <option value="7">7</option>
                     </select>
-                    <select id="height" name="height" value={inches} onChange={(e) => setInches(e.target.value)} className="w-1/3 border rounded-md py-2 px-1 mb-4 bg-blue-50 text-slate-900">
+                    <select id="height" name="height" value={inches} onChange={(e) => setInches(e.target.value)} className="w-1/3 border rounded-md py-1.5 px-1 mb-4 bg-blue-50 text-slate-900">
                         <option value={null}>Inches</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -192,7 +208,7 @@ function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinTo
                 </div>
 
                 <div className="mb-4">
-                    <span className="block text-white mb-3">Water Level (choose one):</span>
+                    <span className="block text-white mt-2">Water Level (choose one):</span>
                     <div className="flex justify-evenly">
                         <label htmlFor="waterlevel1" className={`inline-block border-2 ${activeOption === 1 ? "border-red-800" : "border-transparent hover:border-blue-100 "}`} onClick={handleOption(0.2, 1)}>
                             <img src="/img/crowdsource/1.png" width={100} height={100} alt="Low water level" />
@@ -218,13 +234,12 @@ function Form( {setCsPinDropLocation, csPinDropLocation, setCsPinToggle, csPinTo
                     </div>
                 </div>
 
-                <label htmlFor="location" className="block text-white mb-3">Location:</label>
-                <input type="text" placeholder='enter location manually' id="location" name="location" disabled={gpslocation} value={location} onChange={(e) => setLocation(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
+                <label htmlFor='description' className="block text-white mt-2">Description:</label>
+                <textarea id="description" placeholder='Optional' name="description" value={feedback} onChange={(e)=>setFeedback(e.target.value)} className="w-full border rounded-md py-1.5 px-4 bg-blue-50 text-slate-900 resize-none" rows="3"></textarea>
 
-                <label htmlFor="location" className="block text-white mb-3">Feedback:</label>
-                <textarea id="feedback" placeholder='Optional' name="feedback" value={feedback} onChange={(e) => setFeedback(e.target.value)} className="w-full h-28 border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
-
-                <button onClick={handleSubmit} className="w-full bg-blue-500 text-white py-2 px-4 mt-5 rounded-md hover:bg-blue-600">Submit</button>
+                <div className='flex justify-center mt-4 mb-2'>
+                    <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-md">Submit</button>
+                </div>
             </div>
             <div className="mt-4 text-white">{message}</div>
         </div>

@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
+// trainflood.jsx
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-
 import { fetchTrainStations } from '../utils/TrainAPI';
-import { useState } from 'react';
 import { TrainLegends } from '../components/home/Legends';
 
-
-function TrainFlood() {
+const TrainFlood = () => {
   const [data, setData] = useState(null);
-
 
   useEffect(() => {
     const fetchStationsData = async () => {
       try {
-        const data = await fetchTrainStations();
-        setData(data);
-        console.log("data:", data);
+        const stationsData = await fetchTrainStations();
+        setData(stationsData);
       } catch (error) {
-        console.error("Error fetching stations:", error);
+        console.error('Error fetching train station data:', error);
       }
     };
 
@@ -25,68 +21,75 @@ function TrainFlood() {
   }, []);
 
   return (
-    <div className="flex h-screen">
-      <div className="w-screen h-5/6  m-2">
-        <MapContainer
-            className='h-full w-full z-10'
+    <div className="page-container bg-white">
+      <div className="page-content">
+        <h1 className="text-2xl sm:text-3xl font-bold text-blue-700 text-center mb-6">
+          Train Station Flood Status
+        </h1>
+        
+        <div className="relative w-full h-[calc(100vh-14rem)] sm:h-[calc(100vh-12rem)] rounded-lg overflow-hidden shadow-lg">
+          <MapContainer
+            className="h-full w-full z-10"
             center={[19.1, 72.9]}
             zoom={11}
             maxZoom={18}
             minZoom={11}
-            maxBounds={[
-                [19.4, 72.6],
-                [18.85, 73.2]
-            ]}
-        >
-            <TileLayer 
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='Climate IIT Bombay'
+            maxBounds={[[19.4, 72.6], [18.85, 73.2]]}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="Climate IIT Bombay"
             />
 
-            {data && data.map((station, index) => {
-              let color;
-              if (station.WarningLevel === 0) {
-                color = 'green';
-              } else if (station.WarningLevel === 1) {
-                color = 'yellow';
-              } else if (station.WarningLevel === 2) {
-                color = 'orange';
-              } else {
-                color = 'red';
-              }
+            {data &&
+              data.map((station, index) => {
+                const color =
+                  station.WarningLevel === 0
+                    ? 'green'
+                    : station.WarningLevel === 1
+                    ? 'yellow'
+                    : station.WarningLevel === 2
+                    ? 'orange'
+                    : 'red';
 
-              return (
-                <CircleMarker
-                  key={index}
-                  center={{ lat: station.latitude, lng: station.longitude }}
-                  color='black'
-                  fillColor={color}
-                  fill={true}
-                  fillOpacity={1}
-                  radius={10}
-                >
-                  <Popup className="popup-content"> {station.station_name} </Popup>
-                </CircleMarker>
+                return (
+                  <CircleMarker
+                    key={index}
+                    center={{ lat: station.latitude, lng: station.longitude }}
+                    color="black"
+                    fillColor={color}
+                    fillOpacity={1}
+                    radius={8}
+                  >
+                    <Popup>
+                      <div className="p-2">
+                        <p className="text-sm sm:text-base">
+                          <span className="font-medium">Station:</span> {station.station_name}
+                          <br />
+                          <span className="font-medium">Warning Level:</span>{' '}
+                          <span className={`
+                            ${station.WarningLevel === 0 ? 'text-green-600' : ''}
+                            ${station.WarningLevel === 1 ? 'text-yellow-600' : ''}
+                            ${station.WarningLevel === 2 ? 'text-orange-600' : ''}
+                            ${station.WarningLevel === 3 ? 'text-red-600' : ''}
+                          `}>
+                            {station.WarningLevel}
+                          </span>
+                        </p>
+                      </div>
+                    </Popup>
+                  </CircleMarker>
                 );
-              })
-            }
-        </MapContainer>
-        <TrainLegends />
+              })}
+          </MapContainer>
+        </div>
+
+        <div className="mt-4 sm:mt-6">
+          <TrainLegends />
+        </div>
       </div>
-      {/* <div className="w-1/3 h-full p-4">
-        
-        <h1 className="text-3xl font-bold text-center">Train Flood Information</h1>
-        <ul className="list-disc ml-5 mt-4">
-          <li>Current status of the flood</li>
-          <li>Affected areas</li>
-          <li>Rescue operations underway</li>
-          <li>Contact information for help</li>
-          <li>Preventive measures</li>
-        </ul>
-      </div> */}
     </div>
   );
-}
+};
 
 export default TrainFlood;
-
