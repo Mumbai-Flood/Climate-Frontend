@@ -1,5 +1,6 @@
 import React from 'react';
 import '../WhoWeAre.css';
+import { FaGithub } from 'react-icons/fa';
 
 // Logo imports
 import iitbLogo from '../iitb.png';
@@ -74,6 +75,14 @@ const About = () => {
                 <section className='mb-8 sm:mb-16'>
                     <h1 className='text-3xl sm:text-4xl font-bold text-blue-700 text-center mb-6 sm:mb-8'>
                         About Mumbai Flood Experiment
+                        <a 
+                            href="https://github.com/Mumbai-Flood" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-block ml-3 text-gray-600 hover:text-gray-800 transition-colors"
+                        >
+                            <FaGithub className="inline-block text-3xl" />
+                        </a>
                     </h1>
                     <div className='max-w-4xl mx-auto space-y-4 sm:space-y-6 text-gray-700 px-4 sm:px-0'>
                         <p className='text-base sm:text-lg'>
