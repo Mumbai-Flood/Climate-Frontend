@@ -26,3 +26,5 @@ yarn-error.log*
 serve.json
 
 server/db.sqlite3
+
+.env
