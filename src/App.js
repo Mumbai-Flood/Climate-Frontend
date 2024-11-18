@@ -47,18 +47,12 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={isMobile ? <HomeMobile /> : <Home />} />
-          <Route 
-            path="/warning" 
-            element={isMobile ? <HomeMobile warningtab={3} /> : <Home warningtab={3} />} 
+          <Route
+            path="/warning"
+            element={isMobile ? <HomeMobile warningtab={3} /> : <Home warningtab={3} />}
           />
-          <Route 
-            path="/train" 
-            element={isMobile ? <TrainFloodMobile /> : <TrainFlood />} 
-          />
-          <Route 
-            path="/tweet" 
-            element={isMobile ? <TweetMobile /> : <Tweet />} 
-          />
+          <Route path="/train" element={isMobile ? <TrainFloodMobile /> : <TrainFlood />} />
+          <Route path="/tweet" element={isMobile ? <TweetMobile /> : <Tweet />} />
           <Route path="/about" element={<About />} />
           <Route path="/past" element={<Past />} />
           <Route path="*" element={<NotFound />} />

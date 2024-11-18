@@ -15,10 +15,10 @@ export default function WaterlevelMap({ setLocations, location }) {
     avg5min: 0,
     avg15min: 0,
     avg12hr: 0,
-    avg24hr: 0
+    avg24hr: 0,
   });
 
-  const handleMarkerClick = (marker) => {
+  const handleMarkerClick = marker => {
     setActivestation(marker);
   };
 
@@ -45,16 +45,20 @@ export default function WaterlevelMap({ setLocations, location }) {
             ...entry,
             parameter_values: {
               ...entry.parameter_values,
-              us_mb: parseInt(entry.parameter_values.us_mb) > 300 ? 0 : parseInt(entry.parameter_values.us_mb),
+              us_mb:
+                parseInt(entry.parameter_values.us_mb) > 300
+                  ? 0
+                  : parseInt(entry.parameter_values.us_mb),
             },
           }));
 
           // Function to calculate slope and remove spikes
-          const removeSpikes = (data) => {
+          const removeSpikes = data => {
             const cleanedData = [...data];
             for (let i = 1; i < data.length; i++) {
               const timeDiff = (data[i].time - data[i - 1].time) / 60; // in minutes
-              const waterLevelDiff = data[i].parameter_values.us_mb - data[i - 1].parameter_values.us_mb;
+              const waterLevelDiff =
+                data[i].parameter_values.us_mb - data[i - 1].parameter_values.us_mb;
               const slope = waterLevelDiff / timeDiff;
               if (Math.abs(slope) > 25) {
                 // if(cleanedData[i].parameter_values.us_mb > cleanedData[i - 1].parameter_values.us_mb)
@@ -68,7 +72,7 @@ export default function WaterlevelMap({ setLocations, location }) {
           setWaterLevelData({ ...data, data: cleanedData });
 
           const now = Date.now() / 1000; // Current time in seconds
-          const calculateAverage = (interval) => {
+          const calculateAverage = interval => {
             const filteredData = cleanedData.filter(entry => now - entry.time <= interval);
             const sum = filteredData.reduce((acc, val) => acc + val.parameter_values.us_mb, 0);
             return filteredData.length > 0 ? sum / filteredData.length : 0;
@@ -78,7 +82,7 @@ export default function WaterlevelMap({ setLocations, location }) {
             avg5min: calculateAverage(5 * 60),
             avg15min: calculateAverage(15 * 60),
             avg12hr: calculateAverage(12 * 60 * 60),
-            avg24hr: calculateAverage(24 * 60 * 60)
+            avg24hr: calculateAverage(24 * 60 * 60),
           });
 
           // Set chart range to show the latest data
@@ -99,7 +103,7 @@ export default function WaterlevelMap({ setLocations, location }) {
 
   const handleNext = () => {
     if (chartRange.end < waterLevelData.data.length) {
-      setChartRange((prevRange) => ({
+      setChartRange(prevRange => ({
         start: prevRange.start + 1,
         end: prevRange.end + 1,
       }));
@@ -108,14 +112,14 @@ export default function WaterlevelMap({ setLocations, location }) {
 
   const handlePrev = () => {
     if (chartRange.start > 0) {
-      setChartRange((prevRange) => ({
+      setChartRange(prevRange => ({
         start: prevRange.start - 1,
         end: prevRange.end - 1,
       }));
     }
   };
 
-  const formatTimeLabel = (timestamp) => {
+  const formatTimeLabel = timestamp => {
     const date = new Date(timestamp * 1000);
     return date.getHours() + ':' + String(date.getMinutes()).padStart(2, '0');
   };
@@ -127,7 +131,6 @@ export default function WaterlevelMap({ setLocations, location }) {
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
-      
     },
     content: {
       maxWidth: '100%',
@@ -153,13 +156,11 @@ export default function WaterlevelMap({ setLocations, location }) {
             eventHandlers={{ click: () => handleMarkerClick(station) }}
           >
             {activestation && activestation.id === station.id && (
-              <Popup 
-                minWidth={600}
-                className="custom-popup"
-                style={popupStyles.contentWrapper}
-              >
+              <Popup minWidth={600} className="custom-popup" style={popupStyles.contentWrapper}>
                 <div style={popupStyles.content}>
-                  <h3 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.5em' }}>{station.name}</h3>
+                  <h3 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.5em' }}>
+                    {station.name}
+                  </h3>
                   <p>{station.address}</p>
                   <h4>Average Water Level in last:</h4>
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -199,7 +200,7 @@ export default function WaterlevelMap({ setLocations, location }) {
                           ['Time', 'Water Level (in cm)'],
                           ...waterLevelData.data
                             .slice(chartRange.start, chartRange.end)
-                            .map((entry) => [
+                            .map(entry => [
                               formatTimeLabel(entry.time),
                               parseInt(entry.parameter_values.us_mb),
                             ]),
@@ -215,15 +216,15 @@ export default function WaterlevelMap({ setLocations, location }) {
                             ticks: waterLevelData.data
                               .slice(chartRange.start, chartRange.end)
                               .filter((_, idx) => idx % 2 === 0)
-                              .map((entry) => new Date(entry.time * 1000)),
+                              .map(entry => new Date(entry.time * 1000)),
                           },
                           vAxis: {
                             title: 'Water Level (in cm)',
                             viewWindow: {
                               min: 0,
-                              max: 300
+                              max: 300,
                             },
-                            ticks: [0, 50, 100, 150, 200, 250, 300]
+                            ticks: [0, 50, 100, 150, 200, 250, 300],
                           },
                           legend: { position: 'none' },
                         }}

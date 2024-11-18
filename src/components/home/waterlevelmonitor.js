@@ -7,16 +7,13 @@ export default function WaterlevelMonitor() {
 
   return (
     <div>
-      <WaterlevelWidget 
-        width="400px" 
-        height="600px" 
-        setLocation={setSelectedStation} 
-        location={selectedStation} 
+      <WaterlevelWidget
+        width="400px"
+        height="600px"
+        setLocation={setSelectedStation}
+        location={selectedStation}
       />
-      <WaterlevelMap 
-        setLocation={setSelectedStation} 
-        location={selectedStation} 
-      />
+      <WaterlevelMap setLocation={setSelectedStation} location={selectedStation} />
     </div>
   );
 }
