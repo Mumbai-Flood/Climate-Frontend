@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7656887c.css",
+    "main.js": "/static/js/main.c8191230.js",
+    "static/media/bmc.png": "/static/media/bmc.c11ad6fe88b31a1cc5e5.png",
+    "static/media/Picture7.png": "/static/media/Picture7.44bcd4688c3f461c8b23.png",
+    "static/media/Picture6.png": "/static/media/Picture6.3652381eef2c2fbf0319.png",
+    "static/media/Picture1.png": "/static/media/Picture1.0f9f2322be919e6a8ba1.png",
+    "static/media/mcmbg.png": "/static/media/mcmbg.3b0689d4f2b45ef17922.png",
+    "static/media/hebg.png": "/static/media/hebg.bd75f2708c8bc5669a95.png",
+    "static/media/qrcn1.png": "/static/media/qrcn1.99790becbd8c5ce66ca4.png",
+    "static/media/Picture4.jpg": "/static/media/Picture4.6192879f256a1bfb79a9.jpg",
+    "static/media/wmarker.png": "/static/media/wmarker.1a1bb29a9f340797452a.png",
+    "static/media/cs.png": "/static/media/cs.bcc34c0195f6a6a8e56c.png",
+    "static/media/cs2bg.png": "/static/media/cs2bg.844b403b6b99061ee479.png",
+    "static/media/hdfc.png": "/static/media/hdfc.d7e2746806bf42eac00c.png",
+    "static/media/iitb.png": "/static/media/iitb.7b7ab9c20b06ee32bf6c.png",
+    "static/media/Picture2.jpg": "/static/media/Picture2.a1899b177a0c08751b22.jpg",
+    "static/media/Picture5.jpg": "/static/media/Picture5.0735484facedcdacb1c1.jpg",
+    "static/media/Picture3.jpg": "/static/media/Picture3.a438e59f99181140a54b.jpg",
+    "static/media/loc.png": "/static/media/loc.8e056b9baa3611538609.png",
+    "index.html": "/index.html",
+    "main.7656887c.css.map": "/static/css/main.7656887c.css.map",
+    "main.c8191230.js.map": "/static/js/main.c8191230.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7656887c.css",
+    "static/js/main.c8191230.js"
+  ]
+}
