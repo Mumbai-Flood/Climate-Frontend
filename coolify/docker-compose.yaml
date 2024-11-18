@@ -1,8 +1,0 @@
-services:
-  app:
-    build:
-      context: ..
-      dockerfile: coolify/Dockerfile
-    restart: always
-    ports:
-      - "80:80"
