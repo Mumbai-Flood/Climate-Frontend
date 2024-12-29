@@ -46,7 +46,7 @@ const TEAM_MEMBERS = [
     link: 'https://www.linkedin.com/in/sheeba-sekharan/',
   },
   {
-    name: 'Shrabani Tripathy',
+    name: 'Dr. Shrabani Tripathy',
     link: 'https://www.linkedin.com/in/shrabani-tripathy-37979310b/',
   },
   {
@@ -54,7 +54,7 @@ const TEAM_MEMBERS = [
     link: 'https://www.linkedin.com/in/sautrik-chaudhuri-094064141/',
   },
   {
-    name: 'Jisha Joseph',
+    name: 'Dr. Jisha Joseph',
     link: 'https://www.linkedin.com/in/jisha-joseph-33a5b7aa/',
   },
   {
